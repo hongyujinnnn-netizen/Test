@@ -8,7 +8,8 @@ import Navbar from "../components/navbar/navbar";
 // import { use } from "react"; // Removed: Unused
 import type { ReactElement } from "react";
 import Expressions from "../components/Expressions/expressions";
-import PhrasalVerbs from "../components/Expressions/cepv";
+import PhrasalVerbs from "../components/Expressions/phrasalVerbs";
+import EnglishCollocations from "../components/Expressions/englishCollocations";
 
 export default function Home() {
   const nativeLanguages = [
@@ -44,6 +45,6 @@ export default function Home() {
   
   
   return (
-    <Expressions />
+    <EnglishCollocations/>
   );
 }
