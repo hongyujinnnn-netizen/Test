@@ -10,6 +10,7 @@ import type { ReactElement } from "react";
 import Expressions from "../components/Expressions/expressions";
 import PhrasalVerbs from "../components/Expressions/phrasalVerbs";
 import EnglishCollocations from "../components/Expressions/englishCollocations";
+import ProverbsPage from "../components/Expressions/proverbsPage";
 
 export default function Home() {
   const nativeLanguages = [
@@ -45,6 +46,6 @@ export default function Home() {
   
   
   return (
-    <EnglishCollocations/>
+    <ProverbsPage/>
   );
 }
