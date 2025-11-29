@@ -1,6 +1,4 @@
-// page.tsx (Updated Code)
-
-// 'use client';
+'use client';
 import Image from "next/image";
 // import Header from "../components/navbar/navbar"; // Removed: Redundant
 import Navbar from "../components/navbar/navbar";
@@ -11,6 +9,7 @@ import Expressions from "../components/Expressions/expressions";
 import PhrasalVerbs from "../components/Expressions/phrasalVerbs";
 import EnglishCollocations from "../components/Expressions/englishCollocations";
 import ProverbsPage from "../components/Expressions/proverbsPage";
+import IdiomsPage from "../components/Expressions/idiomsPage";
 
 export default function Home() {
   const nativeLanguages = [
@@ -46,6 +45,6 @@ export default function Home() {
   
   
   return (
-    <ProverbsPage/>
+    <IdiomsPage/>
   );
 }

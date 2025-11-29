@@ -1,5 +1,6 @@
-// navbar.tsx
-
+"use client";
+import React from "react";
+import Link from "next/link";
 export default function Navbar() {
   return (
     <>
@@ -26,22 +27,21 @@ export default function Navbar() {
         <div className="py-6">
           <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center space-x-12">
-              <a href="#" className="flex items-center space-x-2">
+              <Link href="#" className="flex items-center space-x-2">
                 <img src="https://langeek.co/assets/images/logo.svg" alt="LanGeek" className="h-9" />
-              </a>
+              </Link>
               <nav className="hidden lg:flex space-x-10 text-gray-700 font-medium">
                 {['Vocabulary', 'Grammar', 'Expressions', 'Pronunciation', 'Reading'].map((item) => (
-                  <a 
+                  <Link 
                     key={item} 
-                    href={item === 'Expressions' ? '/expressions' : '#'} // UPDATED LINK HERE
+                    href={item === 'Expressions' ? '/expressions' : './components/expressions.tsx'} // UPDATED LINK HERE
                     className="hover:text-blue-600 transition"
                   >
                     {item}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
-
             <div className="flex items-center space-x-4">
               <button className="text-gray-600 hover:text-gray-900" title="Search" aria-label="Search">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

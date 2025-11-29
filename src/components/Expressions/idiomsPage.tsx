@@ -29,6 +29,8 @@ import {
     Lightbulb,
     UserCheck,
     Scale,
+    // Additional icon for new component
+    Zap as Lightning,
 } from "lucide-react";
 import Navbar from "../navbar/navbar";
 
@@ -46,26 +48,26 @@ interface Category {
 const CATEGORIES: Category[] = [
     {
         id: "1",
-        title: "Essential Wisdom",
-        description: "The 50 proverbs used in 80% of daily conversations.",
-        progress: 65,
+        title: "Describing People",
+        description: "Idioms used to describe people's characteristics, traits, and behaviors.",
+        progress: 40,
         totalItems: 50,
-        icon: Star,
+        icon: UserCheck,
         theme: "amber",
     },
     {
         id: "2",
-        title: "Time & Timing",
-        description: "Mastering the art of patience and punctuality.",
+        title: "Relationships",
+        description: "Idioms related to friendship, family, and social connections.",
         progress: 30,
         totalItems: 24,
-        icon: Clock,
+        icon: Globe,
         theme: "blue",
     },
     {
         id: "3",
-        title: "Business & Success",
-        description: "Corporate idioms and sayings for the workplace.",
+        title: "Success & Failure",
+        description: "Idioms for achievement, victory, defeat, and perseverance.",
         progress: 10,
         totalItems: 40,
         icon: TrendingUp,
@@ -73,11 +75,11 @@ const CATEGORIES: Category[] = [
     },
     {
         id: "4",
-        title: "Social Connections",
-        description: "Friendship, family, and relationship advice.",
+        title: "Work & Money",
+        description: "Idioms about earning, spending, and business dealings.",
         progress: 0,
         totalItems: 35,
-        icon: Globe,
+        icon: Zap,
         theme: "rose",
     },
 ];
@@ -163,7 +165,7 @@ const CategoryCard = ({ item }: { item: Category }) => {
     );
 };
 
-// 3. INTERACTIVE QUIZ WIDGET
+// 3. INTERACTIVE QUIZ WIDGET (Adapted for Idioms)
 const QuizWidget = () => {
     const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
 
@@ -192,25 +194,24 @@ const QuizWidget = () => {
                 </div>
 
                 <h4 className="text-lg font-medium text-slate-100 mb-6 leading-relaxed">
-                    "Make hay while the{" "}
+                    "Let the cat out of the{" "}
                     <span className="text-amber-400 font-bold border-b-2 border-amber-400/30">
                         ____
-                    </span>{" "}
-                    shines."
+                    </span>
+                    ."
                 </h4>
 
                 <div className="grid grid-cols-2 gap-3">
-                    {["Moon", "Sun", "Star", "Light"].map((opt) => (
+                    {["Bag", "Box", "Door", "Window"].map((opt) => (
                         <button
                             key={opt}
-                            onClick={() => handleGuess(opt === "Sun")}
+                            onClick={() => handleGuess(opt === "Bag")}
                             className={`py-3 rounded-xl text-sm font-bold transition-all duration-200 border border-white/5 hover:bg-white/10 active:scale-95
-                ${status === "correct" && opt === "Sun"
+                ${status === "correct" && opt === "Bag"
                                     ? "!bg-emerald-500 !border-emerald-400"
                                     : ""
                                 }
-                ${status === "wrong" && opt !== "Sun" ? "opacity-50" : ""}
-              `}
+                ${status === "wrong" && opt !== "Bag" ? "opacity-50" : ""}`}
                         >
                             {opt}
                         </button>
@@ -221,135 +222,208 @@ const QuizWidget = () => {
     );
 };
 
-// 4. LEARNING TABS (Dynamic Content Replacement)
-const LearningTabs = () => {
-    const [activeTab, setActiveTab] = useState<"proverb" | "idiom">("proverb");
-
+// NEW COMPONENT: Daily Idiom Widget
+const DailyIdiomWidget = () => {
     return (
-        <div className="mt-12 bg-white rounded-3xl border border-slate-100 shadow-sm p-1">
-            {/* Tab Switcher */}
-            <div className="flex p-1 bg-slate-50/80 rounded-2xl mb-6">
-                <button
-                    onClick={() => setActiveTab("proverb")}
-                    className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2
-            ${activeTab === "proverb"
-                            ? "bg-white text-slate-800 shadow-sm"
-                            : "text-slate-400 hover:text-slate-600"
-                        }`}
-                >
-                    <Quote
-                        size={16}
-                        className={activeTab === "proverb" ? "text-amber-500" : ""}
-                    />
-                    Proverbs
+        <div className="bg-emerald-50 rounded-3xl p-6 border border-emerald-100 relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-emerald-200 rounded-full opacity-50 blur-xl"></div>
+            <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3 text-emerald-700">
+                    <Lightning size={20} />
+                    <span className="font-bold">Daily Idiom</span>
+                </div>
+                <p className="font-bold text-emerald-900 text-lg mb-2">"Kick the bucket"</p>
+                <p className="text-emerald-900/80 text-sm leading-relaxed mb-4">
+                    Meaning: To die (figurative expression).
+                </p>
+                <button className="text-xs font-bold text-emerald-600 hover:text-emerald-800 bg-white px-3 py-2 rounded-lg shadow-sm">
+                    Learn More
                 </button>
-                <button
-                    onClick={() => setActiveTab("idiom")}
-                    className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2
-            ${activeTab === "idiom"
-                            ? "bg-white text-slate-800 shadow-sm"
-                            : "text-slate-400 hover:text-slate-600"
-                        }`}
-                >
-                    <Brain
-                        size={16}
-                        className={activeTab === "idiom" ? "text-blue-500" : ""}
-                    />
-                    Idioms
-                </button>
-            </div>
-
-            {/* Content Area */}
-            <div className="px-6 pb-6 min-h-[200px]">
-                {activeTab === "proverb" ? (
-                    <div className="animate-in fade-in slide-in-from-left-4 duration-500">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">
-                            Literal Wisdom
-                        </h3>
-                        <p className="text-slate-500 mb-6 max-w-lg">
-                            Proverbs state a general truth or piece of advice. They are often
-                            literal instructions for life.
-                        </p>
-                        <div className="bg-amber-50 rounded-xl p-5 border border-amber-100 flex gap-4 items-start">
-                            <div className="bg-white p-2 rounded-full shadow-sm text-xl">
-                                🍯
-                            </div>
-                            <div>
-                                <p className="font-bold text-slate-800 text-lg">
-                                    "You catch more flies with honey than vinegar."
-                                </p>
-                                <p className="text-amber-700/80 text-sm mt-1">
-                                    Being polite gets you what you want faster than being rude.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">
-                            Figurative Language
-                        </h3>
-                        <p className="text-slate-500 mb-6 max-w-lg">
-                            Idioms act as metaphors. You cannot understand the meaning just by
-                            reading the individual words.
-                        </p>
-                        <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 flex gap-4 items-start">
-                            <div className="bg-white p-2 rounded-full shadow-sm text-xl">
-                                ❄️
-                            </div>
-                            <div>
-                                <p className="font-bold text-slate-800 text-lg">
-                                    "Break the ice"
-                                </p>
-                                <p className="text-blue-700/80 text-sm mt-1">
-                                    To do or say something to relieve tension or start a
-                                    conversation.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );
 };
 
-const ProverbGuide = () => {
+// 4. LEARNING TABS (Dynamic Content Replacement - Adapted for Idioms)
+const LearningTabs = () => {
+    const [activeTab, setActiveTab] = useState<"idiom" | "proverb">("idiom");
+
+    return (
+        <div className="mt-12 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-900/5 overflow-hidden">
+            {/* Fancy Tab Switcher with Glass Effect */}
+            <div className="relative p-2 bg-gradient-to-b from-slate-50 to-transparent">
+                <div className="relative flex backdrop-blur-xl bg-white/60 border border-slate-200 rounded-2xl p-1.5 shadow-inner">
+                    {/* Background glow for active tab */}
+                    <div
+                        className={`absolute inset-1.5 rounded-xl bg-gradient-to-r transition-all duration-500 ease-out
+            ${activeTab === "idiom"
+                                ? "from-blue-400/20 to-blue-500/10"
+                                : "from-amber-400/20 to-amber-500/10"
+                            }`}
+                    />
+
+                    <button
+                        onClick={() => setActiveTab("idiom")}
+                        className={`relative z-10 flex-1 flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 group
+              ${activeTab === "idiom"
+                                ? "text-blue-900 shadow-lg bg-white"
+                                : "text-slate-500 hover:text-slate-700"
+                            }`}
+                    >
+                        <Brain
+                            size={20}
+                            className={`transition-colors ${activeTab === "idiom" ? "text-blue-600" : "text-slate-400"}`}
+                            strokeWidth={2.5}
+                        />
+                        <span>Idioms</span>
+                        {activeTab === "idiom" && (
+                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-500 rounded-full" />
+                        )}
+                    </button>
+
+                    <button
+                        onClick={() => setActiveTab("proverb")}
+                        className={`relative z-10 flex-1 flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 group
+              ${activeTab === "proverb"
+                                ? "text-amber-900 shadow-lg bg-white"
+                                : "text-slate-500 hover:text-slate-700"
+                            }`}
+                    >
+                        <Quote
+                            size={20}
+                            className={`transition-colors ${activeTab === "proverb" ? "text-amber-600" : "text-slate-400"}`}
+                            strokeWidth={2.5}
+                        />
+                        <span>Proverbs</span>
+                        {activeTab === "proverb" && (
+                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-amber-600 rounded-full" />
+                        )}
+                    </button>
+                </div>
+            </div>
+
+            {/* Content Area with Smooth Transition & Card Glow */}
+            <div className="p-8 pt-10">
+                <div className="relative">
+                    {activeTab === "idiom" ? (
+                        <div className="animate-in fade-in slide-in-from-left duration-700">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center shadow-md">
+                                    <Brain className="text-2xl" />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-extrabold text-slate-900">
+                                        Figurative Language
+                                    </h3>
+                                    <p className="text-blue-600 font-semibold text-sm mt-1">
+                                        Non-literal • Creative • Cultural
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p className="text-slate-600 leading-relaxed mb-8 max-w-2xl">
+                                Idioms are colorful expressions where the meaning cannot be deduced from the literal words.
+                            </p>
+
+                            <div className="group relative bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-500">
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-transparent rounded-2xl" />
+                                <div className="relative flex gap-5 items-start">
+                                    <div className="text-4xl blur-sm group-hover:blur-none transition-all duration-700">Ice</div>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-2">
+                                            “Break the ice”
+                                        </p>
+                                        <p className="text-blue-700 leading-relaxed">
+                                            To initiate conversation in a social setting and reduce initial tension or awkwardness.
+                                        </p>
+                                    </div>
+                                    <div className="text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <ArrowRight size={24} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="animate-in fade-in slide-in-from-right duration-700">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center shadow-md">
+                                    <div className="text-2xl">Honey</div>
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-extrabold text-slate-900">
+                                        Literal Wisdom
+                                    </h3>
+                                    <p className="text-amber-600 font-semibold text-sm mt-1">
+                                        Direct • Timeless • Universal
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p className="text-slate-600 leading-relaxed mb-8 max-w-2xl">
+                                Proverbs express general truths or advice, often based on common sense and experience.
+                            </p>
+
+                            <div className="group relative bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 hover:shadow-xl hover:shadow-amber-100/50 transition-all duration-500">
+                                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-transparent rounded-2xl" />
+                                <div className="relative flex gap-5 items-start">
+                                    <div className="text-4xl blur-sm group-hover:blur-none transition-all duration-700">Honey</div>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-2">
+                                            “You catch more flies with honey than vinegar”
+                                        </p>
+                                        <p className="text-amber-700 leading-relaxed">
+                                            Kindness and politeness are more effective than hostility in achieving your goals.
+                                        </p>
+                                    </div>
+                                    <div className="text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <ArrowRight size={24} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const IdiomGuide = () => {
     return (
         <div className="mt-16 space-y-16">
             {/* Introduction */}
             <section className="relative">
                 <div className="absolute -left-4 top-0 w-1 h-12 bg-amber-500 rounded-r-full"></div>
                 <h2 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">
-                    What Are Proverbs?
+                    What Are Idioms?
                 </h2>
                 <p className="text-lg text-slate-600 leading-8 mb-8">
-                    Proverbs are succinct expressions of wisdom or advice, often rooted in
-                    centuries of cultural and social experience. They stand out for their{" "}
+                    Idioms are expressions with non-literal meanings, often rooted in
+                    cultural or historical contexts. They stand out for their{" "}
                     <span className="font-semibold text-slate-800">
-                        brevity, clarity, and ability
+                        figurative language, creativity, and ability
                     </span>{" "}
-                    to convey profound meanings with just a few words.
+                    to convey complex ideas in a colorful way.
                 </p>
 
                 <div className="bg-white border-l-4 border-amber-400 p-6 rounded-r-2xl shadow-sm italic text-slate-700">
                     <div className="flex gap-4 mb-4">
                         <div className="flex-1">
                             <p className="font-serif text-lg mb-1">
-                                "A stitch in time saves nine"
+                                "Kick the bucket"
                             </p>
                             <p className="text-sm text-slate-400 font-sans not-italic">
-                                Emphasizing the value of timely action.
+                                Meaning: To die.
                             </p>
                         </div>
                     </div>
                     <div className="flex gap-4">
                         <div className="flex-1">
                             <p className="font-serif text-lg mb-1">
-                                "Actions speak louder than words"
+                                "Let the cat out of the bag"
                             </p>
                             <p className="text-sm text-slate-400 font-sans not-italic">
-                                Highlighting the importance of deeds over promises.
+                                Meaning: To reveal a secret.
                             </p>
                         </div>
                     </div>
@@ -370,21 +444,21 @@ const ProverbGuide = () => {
                 <div className="grid md:grid-cols-3 gap-6">
                     {[
                         {
-                            title: "Ancient Texts",
-                            icon: BookOpen,
-                            desc: "Roots in religious or philosophical writings like the Bible or Confucian teachings.",
+                            title: "Historical Events",
+                            icon: Clock,
+                            desc: "From past occurrences like 'burning the midnight oil' from pre-electricity times.",
                             color: "bg-orange-50 text-orange-600",
                         },
                         {
-                            title: "Oral Traditions",
-                            icon: MessageCircle,
-                            desc: "Passed down through generations, reflecting shared community wisdom.",
+                            title: "Literature & Folklore",
+                            icon: BookOpen,
+                            desc: "From stories and myths, e.g., 'Achilles' heel' from Greek mythology.",
                             color: "bg-blue-50 text-blue-600",
                         },
                         {
-                            title: "Folklore",
-                            icon: Sparkles,
-                            desc: "Emerging from myths, fables, or historical events to capture lessons.",
+                            title: "Cultural Practices",
+                            icon: Globe,
+                            desc: "From everyday customs, e.g., 'barking up the wrong tree' from hunting.",
                             color: "bg-emerald-50 text-emerald-600",
                         },
                     ].map((item, i) => (
@@ -412,24 +486,58 @@ const ProverbGuide = () => {
                 <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
                 <div className="relative z-10">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-                        <div>
-                            <div className="inline-flex items-center gap-2 text-amber-400 font-bold text-sm uppercase tracking-wider mb-2">
-                                <Scale size={16} />
-                                <span>Structural Analysis</span>
+                    <div className="relative mb-10 overflow-hidden">
+                        {/* Subtle glowing background accent */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-blue-500/10 rounded-3xl blur-3xl -z-10"></div>
+
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                            {/* Left: Title + Badge */}
+                            <div className="relative">
+                                {/* Fancy badge */}
+                                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-5 py-2.5 rounded-full shadow-lg shadow-amber-500/20 mb-5 font-bold text-sm uppercase tracking-wider">
+                                    <Scale size={18} strokeWidth={2.5} />
+                                    <span>Structural Analysis</span>
+                                </div>
+
+                                {/* Main title with gradient text */}
+                                <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-white">
+                                        Know the
+                                    </span>{" "}
+                                    <span className="text-white">Difference</span>
+                                </h2>
+
+                                {/* Decorative underline */}
+                                <div className="mt-4 w-24 h-1.5 bg-gradient-to-r from-amber-400 to-transparent rounded-full"></div>
                             </div>
-                            <h2 className="text-3xl font-bold text-white">
-                                Know the Difference
-                            </h2>
+
+                            {/* Right: Description */}
+                            <div className="lg:max-w-md">
+                                <p className="text-slate-300 text-base leading-relaxed backdrop-blur-sm bg-white/5 px-6 py-4 rounded-2xl border border-white/10">
+                                    While idioms, proverbs, and collocations are all integral to language,
+                                    they differ significantly in{" "}
+                                    <span className="text-amber-300 font-semibold">purpose and form</span>.
+                                </p>
+                            </div>
                         </div>
-                        <p className="max-w-md text-sm text-slate-400">
-                            While proverbs, idioms, and collocations are all integral to
-                            language, they differ significantly in purpose and form.
-                        </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-4">
                         {/* Card 1 */}
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                            <div className="bg-blue-500/20 text-blue-400 w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                                <Brain size={20} />
+                            </div>
+                            <h3 className="text-white font-bold mb-2">Idioms</h3>
+                            <p className="text-sm leading-relaxed mb-4">
+                                Figurative expressions where meanings differ from literal words.
+                            </p>
+                            <div className="text-xs font-mono bg-black/30 p-2 rounded text-blue-200">
+                                "Spill the beans"
+                            </div>
+                        </div>
+
+                        {/* Card 2 */}
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/10 transition-colors">
                             <div className="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-lg flex items-center justify-center mb-4">
                                 <Quote size={20} />
@@ -441,20 +549,6 @@ const ProverbGuide = () => {
                             </p>
                             <div className="text-xs font-mono bg-black/30 p-2 rounded text-amber-200">
                                 "A penny saved is a penny earned."
-                            </div>
-                        </div>
-
-                        {/* Card 2 */}
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                            <div className="bg-blue-500/20 text-blue-400 w-10 h-10 rounded-lg flex items-center justify-center mb-4">
-                                <Brain size={20} />
-                            </div>
-                            <h3 className="text-white font-bold mb-2">Idioms</h3>
-                            <p className="text-sm leading-relaxed mb-4">
-                                Figurative expressions where meanings differ from literal words.
-                            </p>
-                            <div className="text-xs font-mono bg-black/30 p-2 rounded text-blue-200">
-                                "Spill the beans"
                             </div>
                         </div>
 
@@ -482,21 +576,21 @@ const ProverbGuide = () => {
                         <Lightbulb size={24} />
                     </div>
                     <h2 className="text-2xl font-bold text-slate-800">
-                        How to Use Proverbs
+                        How to Use Idioms
                     </h2>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <p className="text-slate-600 leading-relaxed">
-                            Proverbs are versatile tools. They can be used in casual
+                            Idioms are versatile tools. They can be used in casual
                             conversations, creative writing, or formal speeches to:
                         </p>
                         <ul className="space-y-3">
                             {[
-                                "Enhance Authenticity: Make your language relatable.",
-                                "Enrich Expression: Add depth and elegance.",
-                                "Bridge Cultural Gaps: Connect with native speakers.",
+                                "Enrich Conversations: Add color and expressiveness.",
+                                "Elevate Writing: Make text more engaging and vivid.",
+                                "Enhance Comprehension: Understand native speakers better.",
                             ].map((tip, i) => (
                                 <li
                                     key={i}
@@ -518,7 +612,7 @@ const ProverbGuide = () => {
                             Quick Tip
                         </h4>
                         <p className="text-slate-600 text-sm mb-4">
-                            Context is key. Using proverbs appropriately ensures they
+                            Context is key. Using idioms appropriately ensures they
                             complement your message without causing confusion.
                         </p>
                         <div className="text-sm font-semibold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-lg inline-block">
@@ -532,12 +626,12 @@ const ProverbGuide = () => {
 };
 
 // --- MAIN PAGE LAYOUT ---
-export default function ProverbsPage() {
+export default function IdiomsPage() {
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] relative overflow-x-hidden font-sans selection:bg-amber-200 selection:text-amber-900">
-            <Navbar/>
+            <Navbar />
             {/* Background Decor */}
             <div className="hidden lg:flex flex-col gap-6 absolute left-6 top-40 opacity-20 select-none pointer-events-none">
                 {[...Array(8)].map((_, i) => (
@@ -564,17 +658,17 @@ export default function ProverbsPage() {
                                     Expressions
                                 </a>
                                 <span className="text-slate-300">/</span>
-                                <span className="text-indigo-600">English Proverbs</span>
+                                <span className="text-indigo-600">English Idioms</span>
                             </div>
 
                             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4 tracking-tight leading-tight">
                                 English{" "}
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-                                    Proverbs
+                                    Idioms
                                 </span>
                             </h1>
                             <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
-                                Here you will find a selection of English proverbs categorized
+                                Here you will find a selection of English idioms categorized
                                 by topic for easier access and better understanding.
                             </p>
                         </div>
@@ -587,7 +681,7 @@ export default function ProverbsPage() {
                                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5 group-focus-within:text-indigo-500 transition-colors" />
                                     <input
                                         type="text"
-                                        placeholder="Search for a word pair..."
+                                        placeholder="Search for an idiom..."
                                         className="w-full pl-12 pr-6 py-3.5 bg-white border border-slate-100 rounded-full shadow-lg shadow-slate-200/50 focus:outline-none focus:ring-4 focus:ring-indigo-50 transition-all text-slate-700 placeholder-slate-400 font-medium"
                                     />
                                 </div>
@@ -620,8 +714,8 @@ export default function ProverbsPage() {
                             {/* Dynamic Tab Section */}
                             <LearningTabs />
 
-                            {/* NEW EDUCATIONAL SECTION INSERTED HERE */}
-                            <ProverbGuide />
+                            {/* EDUCATIONAL SECTION */}
+                            <IdiomGuide />
                         </div>
 
                         {/* Right Column (Sidebar) */}
@@ -637,14 +731,14 @@ export default function ProverbsPage() {
                                 </div>
 
                                 <div className="flex items-end gap-2 mb-2">
-                                    <span className="text-4xl font-black text-slate-800">32</span>
+                                    <span className="text-4xl font-black text-slate-800">28</span>
                                     <span className="text-slate-400 text-sm font-medium mb-1.5">
-                                        / 150 mastered
+                                        / 200 mastered
                                     </span>
                                 </div>
 
                                 <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden mb-4">
-                                    <div className="h-full bg-slate-800 w-[22%] rounded-full"></div>
+                                    <div className="h-full bg-slate-800 w-[14%] rounded-full"></div>
                                 </div>
 
                                 <div className="space-y-3">
@@ -657,12 +751,15 @@ export default function ProverbsPage() {
                                                 Next Achievement
                                             </p>
                                             <p className="text-sm font-bold text-slate-800">
-                                                Wise Owl Badge
+                                                Idiom Master Badge
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {/* NEW COMPONENT: Daily Idiom Widget */}
+                            <DailyIdiomWidget />
 
                             {/* Pro Tip Card */}
                             <div className="bg-indigo-50 rounded-3xl p-6 border border-indigo-100 relative overflow-hidden">
@@ -673,7 +770,7 @@ export default function ProverbsPage() {
                                         <span className="font-bold">Pro Tip</span>
                                     </div>
                                     <p className="text-indigo-900/80 text-sm leading-relaxed mb-4">
-                                        Try using one new proverb in a conversation today. Context
+                                        Try using one new idiom in a conversation today. Context
                                         creates memory!
                                     </p>
                                     <button className="text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-white px-3 py-2 rounded-lg shadow-sm">
