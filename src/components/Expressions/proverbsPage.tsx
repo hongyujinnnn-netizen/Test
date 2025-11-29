@@ -30,6 +30,7 @@ import {
     UserCheck,
     Scale,
 } from "lucide-react";
+import Navbar from "../navbar/navbar";
 
 // --- TYPES ---
 interface Category {
@@ -536,6 +537,7 @@ export default function ProverbsPageDynamic() {
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] relative overflow-x-hidden font-sans selection:bg-amber-200 selection:text-amber-900">
+            <Navbar/>
             {/* Background Decor */}
             <div className="hidden lg:flex flex-col gap-6 absolute left-6 top-40 opacity-20 select-none pointer-events-none">
                 {[...Array(8)].map((_, i) => (

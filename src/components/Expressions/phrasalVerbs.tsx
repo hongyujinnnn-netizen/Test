@@ -5,6 +5,7 @@ import {
   Sparkles, Star, Zap, TrendingUp, CheckCircle, XCircle, 
   HelpCircle, Layers, AlertTriangle, Lightbulb, Target
 } from 'lucide-react';
+import Navbar from '../navbar/navbar';
 
 // --- TYPE DEFINITIONS ---
 interface Category {
@@ -301,7 +302,7 @@ export default function PhrasalVerbs() {
   return (
     <>
       <div className="min-h-screen bg-[#F8FAFC] relative overflow-x-hidden font-sans">
-        
+        <Navbar/>
         {/* Background Decor */}
         <div className="hidden lg:flex flex-col gap-6 absolute left-6 top-40 opacity-20 select-none pointer-events-none">
           {[...Array(8)].map((_, i) => <div key={i} className="text-blue-600 text-xl font-bold">+ + +</div>)}

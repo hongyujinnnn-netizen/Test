@@ -266,7 +266,7 @@ export default function CollocationsPage() {
   return (
     <>
       <div className="min-h-screen bg-[#F8FAFC] relative overflow-x-hidden font-sans">
-        
+        <Navbar/>
         {/* Background Decor */}
         <div className="hidden lg:flex flex-col gap-6 absolute left-6 top-40 opacity-20 select-none pointer-events-none">
           {[...Array(8)].map((_, i) => <div key={i} className="text-indigo-600 text-xl font-bold">~ ~ ~</div>)}

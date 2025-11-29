@@ -10,6 +10,7 @@ import {
   CheckCircle2, 
   Mail 
 } from "lucide-react";
+import Navbar from "../navbar/navbar";
 
 export default function Expressions() {
   const [activeTab, setActiveTab] = React.useState("All");
@@ -17,7 +18,7 @@ export default function Expressions() {
   return (
     // Changed main wrapper to relative and overflow-hidden to contain the background shapes
     <div className="min-h-screen bg-white relative overflow-hidden font-sans text-slate-900 selection:bg-orange-100">
-      
+      <Navbar/>
       {/* ========== BACKGROUND DECORATIONS ========== */}
       <div className="absolute inset-0 pointer-events-none -z-10">
         
