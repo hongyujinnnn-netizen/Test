@@ -31,7 +31,7 @@ import {
     Scale,
 } from "lucide-react";
 import Navbar from "../navbar/navbar";
-
+import Link from "next/link";
 // --- TYPES ---
 interface Category {
     id: string;
@@ -560,9 +560,9 @@ export default function ProverbsPage() {
                                     Home
                                 </a>
                                 <span className="text-slate-300">/</span>
-                                <a href="/Expressions" className="hover:text-blue-500 transition-colors">
+                                <Link href="/Expressions" className="hover:text-blue-500 transition-colors">
                                     Expressions
-                                </a>
+                                </Link>
                                 <span className="text-slate-300">/</span>
                                 <span className="text-indigo-600">English Proverbs</span>
                             </div>
