@@ -34,7 +34,7 @@ export default function Navbar() {
                 {['Vocabulary', 'Grammar', 'Expressions', 'Pronunciation', 'Reading'].map((item) => (
                   <Link 
                     key={item} 
-                    href={item === 'Expressions' ? '/expressions' : './components/expressions.tsx'} // UPDATED LINK HERE
+                    href={item === item ? '/Expressions' : 'Expressions'} 
                     className="hover:text-blue-600 transition"
                   >
                     {item}

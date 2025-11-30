@@ -130,7 +130,7 @@ export default function Expressions() {
 
                 <div>
                   <Link
-                    href="/phrasalVerbs"
+                    href="/Expressions/PhrasalVerb"
                     className="group border border-orange-200 text-orange-600 px-6 py-2 rounded-full font-medium hover:bg-orange-50 transition flex items-center gap-2 text-sm bg-transparent w-fit"
                   >
                     Explore Verbs
@@ -167,9 +167,12 @@ export default function Expressions() {
                   </p>
                 </div>
                 <div>
+                  <Link href="/Expressions/Collocations">
                   <button className="group border border-gray-300 text-gray-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition flex items-center gap-2 text-sm w-fit">
                     Start Learning <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
+                  </Link>
+
                 </div>
               </div>
 
@@ -217,9 +220,11 @@ export default function Expressions() {
 
                 </div>
                 <div className="mt-auto pt-8">
+                  <Link href="/Expressions/Proverb">
                   <button className="group bg-teal-600 text-white px-8 py-3 rounded-full font-medium hover:bg-teal-700 hover:shadow-lg transition-all flex items-center gap-2 text-sm w-fit">
                     Read Proverbs <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -264,9 +269,11 @@ export default function Expressions() {
                 to understand how native speakers use them in everyday conversations.
               </p>
               <div className="mt-8 hidden md:block">
+                <Link href="/Expressions/IdiomsPage">
                 <button className="group border border-red-300 text-red-600 px-6 py-2 rounded-full font-medium hover:bg-red-50 transition flex items-center gap-2 text-sm bg-transparent">
                   Explore Idioms <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
+                </Link>
               </div>
             </div>
 

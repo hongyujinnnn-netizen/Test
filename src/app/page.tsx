@@ -45,6 +45,6 @@ export default function Home() {
   
   
   return (
-    <IdiomsPage/>
+    <Expressions/>
   );
 }

@@ -560,7 +560,7 @@ export default function ProverbsPage() {
                                     Home
                                 </a>
                                 <span className="text-slate-300">/</span>
-                                <a href="#" className="hover:text-blue-500 transition-colors">
+                                <a href="/Expressions" className="hover:text-blue-500 transition-colors">
                                     Expressions
                                 </a>
                                 <span className="text-slate-300">/</span>
